@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Time-O-Matic</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="/icons/icon-192.png" />
+  <meta name="theme-color" content="#ffffff"/>
+  <style>
+    body { font-family: sans-serif; padding: 1rem; }
+    .tabs { display: flex; gap: 1rem; cursor: pointer; margin-bottom: 1rem; }
+    .tabs li { list-style: none; padding: 0.5rem 1rem; border: 1px solid #ccc; border-radius: 5px; }
+    .tabs .active { background: #007bff; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    label, input, button { display: block; margin: 0.5rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Time-O-Matic</h1>
+
+  <ul class="tabs">
+    <li class="active" onclick="showTab('fin')">Fin différée</li>
+    <li onclick="showTab('depart')">Départ différé</li>
+  </ul>
+
+  <div id="tab-fin" class="tab-content active">
+    <form id="form-fin">
+      <label for="progDuration">Durée du programme :</label>
+      <input type="time" id="progDuration" required step="60" />
+      <label for="desiredEnd">Heure de fin souhaitée :</label>
+      <input type="time" id="desiredEnd" required />
+      <button type="submit">Calculer</button>
+    </form>
+    <p id="finResult"></p>
+  </div>
+
+  <div id="tab-depart" class="tab-content">
+    <form id="form-depart">
+      <label for="startHour">Heure de démarrage souhaitée :</label>
+      <input type="time" id="startHour" required />
+      <button type="submit">Calculer</button>
+    </form>
+    <p id="departResult"></p>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
